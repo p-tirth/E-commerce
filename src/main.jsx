@@ -12,7 +12,7 @@ import Layout from "./layout";
 import Home from "./pages/home";
 import Cart from "./pages/cart.jsx";
 import Product from "./pages/product.jsx"
-import Profile from "./pages/product.jsx"
+import Profile from "./pages/profile.jsx"
 
 const router = createBrowserRouter(
   createRoutesFromElements(

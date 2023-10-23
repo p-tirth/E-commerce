@@ -18,8 +18,8 @@ const Header = () => {
             <NavLink to="/cart" className="text-white">
               Cart
             </NavLink>
-            <NavLink to="/account" className="text-white">
-              Account
+            <NavLink to="/Profile" className="text-white">
+              Profile
             </NavLink>
             {!isAuthenticated ? (
               <button
