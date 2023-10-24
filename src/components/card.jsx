@@ -1,7 +1,26 @@
 import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { updateCart, readCart } from "../firebase/firebaseOperation";
 // import { useNavigate } from "react-router-dom";
 
 const Card = ({ product }) => {
+  // const collectionRef = firestore.collection("cart");
+  let data
+  const { user } = useAuth0();
+  const handleCart = async (id) => {
+    const docId = user.sub;
+    const cartData = await readCart(docId);
+
+    // console.log(JSON.stringify(cartData));
+    if (JSON.stringify(cartData) == "{}") {
+      console.log("empty cart");
+      data = {id:[Number(id)]}
+    } else {
+      data = { id: [...cartData.id, Number(id)] };
+    }
+    await updateCart(docId, data);
+  };
+
   // const navigate = useNavigate();
   return (
     <div className="max-w-sm rounded shadow-lg flex flex-col justify-center p-1 relative">
@@ -34,7 +53,9 @@ const Card = ({ product }) => {
         </span>
       </div>
       <button
-        // onClick={handleCart(product.id)}
+        onClick={() => {
+          handleCart(product.id);
+        }}
         className="p-2 w-fit absolute right-5 bottom-5 rounded-md bg-blue-500 text-white font-semibold hover:text-slate-800"
       >
         Add to Cart
