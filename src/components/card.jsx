@@ -4,20 +4,21 @@ import { updateCart, readCart } from "../firebase/firebaseOperation";
 // import { useNavigate } from "react-router-dom";
 
 const Card = ({ product }) => {
-  // const collectionRef = firestore.collection("cart");
-  let data
   const { user } = useAuth0();
+  let data
+
   const handleCart = async (id) => {
+
     const docId = user.sub;
     const cartData = await readCart(docId);
 
-    // console.log(JSON.stringify(cartData));
     if (JSON.stringify(cartData) == "{}") {
       console.log("empty cart");
       data = {id:[Number(id)]}
     } else {
       data = { id: [...cartData.id, Number(id)] };
     }
+
     await updateCart(docId, data);
   };
 
