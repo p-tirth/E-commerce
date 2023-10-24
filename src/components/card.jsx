@@ -34,8 +34,8 @@ const Card = ({ product }) => {
         </span>
       </div>
       <button
-        onClick={handleCart(product.id)}
-        className="p-2 w-fit absolute right-5 bottom-5 rounded-md bg-blue-500 text-black font-semibold hover:bg-orange-500"
+        // onClick={handleCart(product.id)}
+        className="p-2 w-fit absolute right-5 bottom-5 rounded-md bg-blue-500 text-white font-semibold hover:text-slate-800"
       >
         Add to Cart
       </button>
