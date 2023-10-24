@@ -6,7 +6,7 @@ const SearchBar = ({ onSearch }) => {
   const [searchData, setSearchData] = useState([])
   const handleSearch = async () => {
     console.log(searchQuery);
-    const response = await fetch(`https://dummyjson.com/products/search?q=${searchQuery}&limit=10`)
+    const response = await fetch(`https://dummyjson.com/products/search?q=${searchQuery}&limit=0`)
       .then((res) => res.json())
       // .then(console.log);
     setSearchData(response.products)

@@ -6,7 +6,7 @@ const cartSchema = new mongoose.Schema({
     },
 })
 
-const Food = mongoose.models.foods || mongoose.model
+const Cart = mongoose.models.carts || mongoose.model
 ("carts ",cartSchema)
 
-export default Food
+export default Cart
