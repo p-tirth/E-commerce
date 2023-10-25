@@ -15,18 +15,18 @@ const Header = () => {
     <div>
       <div className="bg-blue-500 p-4">
         <div className="container mx-auto">
-          <nav className="flex justify-between items-center">
+          <nav className="flex justify-between items-center ">
             <NavLink to="/" className="text-2xl font-bold text-white">
               My E-Commerce
             </NavLink>
             <div className="space-x-4">
-              <NavLink to="/product" className="text-white">
+              <NavLink to="/product" className="text-white hover:text-black">
                 Products
               </NavLink>
-              <NavLink to="/cart" className="text-white">
+              <NavLink to="/cart" className="text-white hover:text-black">
                 Cart
               </NavLink>
-              <NavLink to="/Profile" className="text-white">
+              <NavLink to="/Profile" className="text-white hover:text-black">
                 Profile
               </NavLink>
               {!isAuthenticated ? (
@@ -49,7 +49,7 @@ const Header = () => {
                     Log Out
                   </button>
                   <div className="border-2 border-black text-black font-bold bg-yellow-400 p-1 rounded-md w-fit">
-                    Welcome , {user.sub}
+                    Welcome , {user.name}
                   </div>
                 </span>
               )}

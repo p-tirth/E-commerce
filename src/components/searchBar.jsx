@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import Card from "./card"
+import axios from "axios";
 
 const SearchBar = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchData, setSearchData] = useState([])
   const handleSearch = async () => {
     console.log(searchQuery);
-    const response = await fetch(`https://dummyjson.com/products/search?q=${searchQuery}&limit=0`)
-      .then((res) => res.json())
-      // .then(console.log);
-    setSearchData(response.products)
+    const response = await axios.get(`https://dummyjson.com/products/search?q=${searchQuery}&limit=0`);
+    setSearchData(response.data.products);
     console.log(response.products)
   };
   const handleProduct = (id) =>{
