@@ -3,24 +3,39 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { updateCart, readCart } from "../firebase/firebaseOperation";
 // import { useNavigate } from "react-router-dom";
 
-const Card = ({ product }) => {
+const Card = ({ product,remove }) => {
+  console.log(remove)
   const { user } = useAuth0();
-  let data
+  let data;
 
   const handleCart = async (id) => {
-
     const docId = user.sub;
     const cartData = await readCart(docId);
 
     if (JSON.stringify(cartData) == "{}") {
       console.log("empty cart");
-      data = {id:[Number(id)]}
+      data = { id: [Number(id)] };
     } else {
       data = { id: [...cartData.id, Number(id)] };
     }
 
     await updateCart(docId, data);
   };
+  const removeFromCart = async (id) => {
+    const docId = user.sub;
+    const cartData = await readCart(docId);
+
+    if (JSON.stringify(cartData) == "{}") {
+      console.log("empty cart");
+      data = { id: [Number(id)] };
+    } else {
+      data =  [...cartData.id] ;
+      const removedId = data.splice(data.indexOf(id),1)
+      console.log(removedId)
+      data = { id: [...data,] };
+      await updateCart(docId, data);
+  }
+}
 
   // const navigate = useNavigate();
   return (
@@ -53,14 +68,17 @@ const Card = ({ product }) => {
           {product.discountPercentage}% off
         </span>
       </div>
-      <button
-        onClick={() => {
-          handleCart(product.id);
-        }}
-        className="p-2 w-fit absolute right-5 bottom-5 rounded-md bg-blue-500 text-white font-semibold hover:text-slate-800"
-      >
-        Add to Cart
-      </button>
+     <div className="flex justify-end">
+       <button
+         onClick={() => {
+           handleCart(product.id);
+         }}
+         className="p-2 w-fit m-1 rounded-md bg-blue-500 text-white font-semibold hover:text-slate-800"
+       >
+         Add to Cart
+       </button>
+       {remove && <button className="p-2 w-fit m-1 rounded-md bg-red-500 text-white font-semibold hover:text-slate-800" onClick={()=>{removeFromCart(product.id)}} >Remove</button>}
+     </div>
     </div>
   );
 };

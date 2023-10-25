@@ -35,7 +35,7 @@ const SearchBar = ({ onSearch }) => {
       <div className="">
       <div className="p-5 flex flex-wrap justify-start gap-4">
         {searchData.map((product, index) => (
-          <Card key={index} product={product}/>
+          <Card key={index} product={product} remove={false} />
         ))}
       </div>
     </div>

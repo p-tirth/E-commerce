@@ -5,7 +5,7 @@ import Card from "../components/card";
 import axios from "axios";
 
 export default function Cart() {
-  const { user } = useAuth0();
+  const { user } =  useAuth0();
   const [cart, setCart] = useState([]);
 
   const getProductFromId = async (id) =>{
@@ -21,6 +21,9 @@ export default function Cart() {
     console.log(cartItem)
     setCart(cartItem)
   };
+  useEffect(()=>{
+    refreshCart()
+  },[user])
   return (
     <div>
       <button
@@ -34,7 +37,7 @@ export default function Cart() {
       (<div className="p-5 flex flex-wrap justify-start gap-4">
         {cart.map((product, index) => (
           // <div key={index}>{product}</div>
-          <Card key={index} product={product.data}/>
+          <Card key={index} product={product.data} remove={true}/>
         ))}
       </div>):(
       <div className="p-4 text-xl border border-black m-1 font-bold">
